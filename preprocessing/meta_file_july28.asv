@@ -1,0 +1,90 @@
+%%%%%%%%%%%%
+% please rename when adding a c
+%%%%%%%%%%%%
+
+function params = meta_file_july10(dataset_idx)
+
+clear params
+
+params.trigchan = {'Pulse DC1-REF' 'Pulse DC2-REF' 'Pulse DC3-REF' 'Pulse DC4-REF' 'Pulse DC5-REF' 'Pulse DC6-REF' 'Pulse DC7-REF' 'Pulse DC8-REF'};
+
+switch dataset_idx
+    case 1 % NY442 MS Runs 1-4 clin1&2
+        params.experiment = 'MS';
+        params.subject = 'NY442';
+        params.filenames = {...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN1_CLIN1/NY442_MSL_RUN1_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN2_CLIN1/NY442_MSL_RUN2_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN3_CLIN1/NY442_MSL_RUN3_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN4_CLIN1/NY442_MSL_RUN4_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN1_CLIN2/NY442_MSL_RUN1_CLIN2.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN2_CLIN2/NY442_MSL_RUN2_CLIN2.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN3_CLIN2/NY442_MSL_RUN3_CLIN2.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSL_RUN4_CLIN2/NY442_MSL_RUN4_CLIN2.edf'
+            };
+        params.RunOrRest = 1; % 1 - run, 0 - rest
+        params.event_names = {'Sound','Face','Building'};
+        params.events = [1 4 5]; % Trigger codes
+        params.main_dir = '/space/mdeh5/1/halgdev/projects/pdelprato/Results'; % Main directory for saving analysis results
+        params.trig_thresh = 190000; % For trigger detection
+        bad_chs_clin1 = {'GA_23','GA_27','GA_32','GB_63','RAF_07','LMT_01','DH_08'}; % pretty consistent across runs
+        bad_chs_clin2_r1 = {'GA63','GB13','GB17','LP8'};
+        bad_chs_clin2_r2 = {'GA63','GB13','GB17','LP8'};
+        bad_chs_clin2_r3 = {'GA63','GB13','GB17','LP8'};
+        bad_chs_clin2_r4 = {'GA63','GB13','RAF2','LP8'};
+        bad_chs_clin2 = unique([bad_chs_clin2_r1 bad_chs_clin2_r2 bad_chs_clin2_r3 bad_chs_clin2_r4]);
+        params.bad_chs = {bad_chs_clin1, bad_chs_clin2};
+        
+    case 2 % NY442 MS post-run rest clin1
+        params.experiment = 'MS';
+        params.subject = 'NY442';
+        params.filenames = {...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSRR_CLIN1/NY442_MSRR_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY442/Memory/NY442_MS/NY442_MSRR_CLIN2/NY442_MSRR_CLIN2.edf'};
+        params.RunOrRest = 0; % 1 - run, 0 - rest
+        params.main_dir = '/space/mdeh5/1/halgdev/projects/pdelprato/Results'; % Main directory for saving analysis results
+        params.bad_chs = {'GA_23','GA_27','GA_32','GB_63','RAF_07','LMT_01','DH_08'};
+        
+    case 3 %NY451 MS Runs 1-3 clin1&2
+        params.experiment = 'MS';
+        params.subject = 'NY451';
+        params.filenames = {...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY451/NY451_MS/NY451_MSL_Run1_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY451/NY451_MS/NY451_MSL_Run2_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY451/NY451_MS/NY451_MSL_Run3_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY451/NY451_MS/NY451_MSL_Run1_CLIN2.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY451/NY451_MS/NY451_MSL_Run2_CLIN2.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY451/NY451_MS/NY451_MSL_Run3_CLIN2.edf'
+            };
+        params.RunOrRest = 1; % 1 - run, 0 - rest
+        params.main_dir = '/space/mdeh5/1/halgdev/projects/pdelprato/Results'; % Main directory for saving analysis results
+        params.bad_chs = {{'DA_02'},{'GB_49'}};
+        params.event_names = {'Sound','Face','Building'};
+        params.events = [1 4 5]; % Trigger codes
+        params.main_dir = '/space/mdeh5/1/halgdev/projects/pdelprato/Results'; % Main directory for saving analysis results
+        params.trig_thresh = 190000; % For trigger detection
+        
+         case 4 % NY453 PM Runs 1-4 clin1&2
+        params.experiment = 'PM';
+        params.subject = 'NY453';
+        params.filenames = {...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY453/NY453_PM/NY453_PM_day2_CLIN1.edf',...
+            '/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY453/NY453_PM/NY453_PM_day2_CLIN2_part2.edf' };
+            %'/space/mdeh5/1/halgdev/incoming/iEEG_NYU/NY453/NY453_PM/NY453_PM_day2_CLIN2.edf'
+        params.RunOrRest = 1; % 1 - run, 0 - rest
+        params.event_names = {'grousing','dressing','pressing','blessing','browsing','glazing',...
+            'placing','gracing','trashing','crashing','grazing','bracing','plaything','praising','tracing','button_press'};
+        params.events = [1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 64]; % Trigger codes
+%         params.event_names = {'response'};
+%         params.events = [64];
+        params.auditory_electrodes = {'GA_14','GA_15','GA_28','GB_45','GB_46','GB_47','GB_48','GB_53','GB_54',...
+    'GB_55','GB_56','GB_61','GB_62','GB_63','GB_64','DPI_01','DPI_02'};
+        params.main_dir = '/space/mdeh5/1/halgdev/projects/pdelprato/Results'; % Main directory for saving analysis results
+        params.trig_thresh = 190000; % For trigger detection
+        bad_chs_clin1 = {'DH_08'}; % pretty consistent across runs
+        bad_chs_clin2 = {'OF_02'};
+        params.bad_chs = {bad_chs_clin1, bad_chs_clin2};
+        params.logfile = 'NY453_PM-bi_pm.log';
+end
+
+params.filenum = length(params.filenames);
