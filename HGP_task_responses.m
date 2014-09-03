@@ -1,4 +1,4 @@
-% Integrating Kristen's & UCSD scripts
+   % Integrating Kristen's & UCSD scripts
 
 
 %% Set parameters
@@ -9,7 +9,7 @@ ft_defaults;
 %Calls on meta_file to re-initialize params, dataset_idx contains
 %data-specific values
 dataset_idx = 4;
-params = meta_file_july28(dataset_idx); % The function clears params
+params = meta_file_v4(dataset_idx); % The function clears params
 
 %Frequency bands of interest for analysis
 params.linenoise_freq = [60 120 180]; % Hz
@@ -235,13 +235,13 @@ end
 %% Plot HGP
 
 % params.plotchan = 'all';
-params.prestim_plot = -0.3; % in sec, for plotting only
-params.poststim_plot = 1; % in sec, for plotting only
+params.prestim_plot = -0.1; % in sec, for plotting only
+params.poststim_plot = .5; % in sec, for plotting only
 params.plotevt = params.events;
 
 visible = 1; % =1 necessary for printing figures with the correct dimensions
-
-plot_avgHGP_allchan_fn_PD(hgp_trials_avgsem.avgdat{1:3}, params, visible);
+plot_avgHGP(hgp_trials_avgsem, params);
+%plot_avgHGP(hgp_trials_avgsem, params,params.auditory_electrodes);
 
 
 
