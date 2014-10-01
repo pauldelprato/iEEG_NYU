@@ -7,7 +7,7 @@ end
 if nargin<3
     channels = params.EEG_goodchan_all;
     
-    chan_idx = 1:params.EEG_goodchan_all;
+    chan_idx = 1:length(params.EEG_goodchan_all);
     
 else
     chan_idx = [];
@@ -39,13 +39,29 @@ line_color_bank = [[0 1 0];[0 0 1];[1 0 0];[0 0 0];[0 1 1];...
     [1 0 1];[1 1 0];[0 .5 0];[0 0 .5];[.5 0 0];...
     [0 .5 .5];[.5 0 .5];[.5 .5 0];[0 .75 0];[0 0 .75];[.75 0 0]];
 
-line_colors = line_color_bank(1:length(params.events),:);
+line_colors = line_color_bank(1:length(params.plotevt),:);
 %% Events and channel number per figure
 
 clear yevent event_name legend_names
 for i = 1:length(params.plotevt)
+    if iscell(params.plotevt)
+        yevent(i) = i;
+        if length(params.plotevt{i}>1)
+            if isfield(params,'plotevtnames')
+                event_name{i} = params.plotevtnames{i};
+            else
+            event_name{i} = 'combined';
+            end
+        else
+            event_name{i} = params.event_names{params.plotevt{i}};
+        end
+%             for j = 1 : length(params.plotevt{i})
+%                 yevent(i) = [yevent(i) ; find(params.events == params.plotevt{j})];
+%             end
+    else
     yevent(i) = find(params.events==params.plotevt(i));
     event_name{i} = params.event_names{yevent(i)};
+    end
     legend_names{i} = [event_name{i} ' N=' num2str(length(avg_data.avgdat{yevent(i)}.trialinfo))];
 end
 

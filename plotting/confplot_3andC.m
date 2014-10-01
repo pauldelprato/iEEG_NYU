@@ -25,10 +25,10 @@ end % if
 z1 = y + err;
 z2 = y - err;
 
-p = plot(x,y,x,z1,x,z2);    YLIM = get(gca,'YLim');    delete(p);
+% p = plot(x,y,x,z1,x,z2);    YLIM = get(gca,'YLim');    delete(p);
 
 X=[x fliplr(x)]';Y=[z1 fliplr(z2)]';
-pa1=patch(X,Y,c,'FaceAlpha',0.4,'LineStyle','none');set(gca,'XLim',[min(x) max(x)]);
+hold on; pa1=patch(X,Y,c,'FaceAlpha',0.4,'LineStyle','none');%set(gca,'XLim',[min(x) max(x)]);
 set(get(get(pa1,'Annotation'),'LegendInformation'),'IconDisplayStyle','off')
 hold on;
 p = plot(x,y,'Color',c,'LineWidth',2);
